@@ -10,13 +10,26 @@ const stdlib = loadStdlib(process.env);
     const ctcAlice = accAlice.deploy(backend);
     const ctcBob = accBob.attach(backend, ctcAlice.getInfo());
 
+    const HAND = ['Rock', 'Paper', 'Scissors'];
+    const OUTCOME = ['Bob wins', 'Draw', 'Alice Wins'];
+
+    const Player = (Who) => ({
+        getHand: () => {
+            const hand = Math.floor(Math.random() * 3);
+            console.log(`${Who} played ${HAND[hand]}`);
+            return hand;
+        },
+        seeOutcome: (outcome) => {
+            console.log(`${Who} saw outcome ${OUTCOME[outcome]}`);
+        },
+    });
+
     await Promise.all([
         backend.Alice(ctcAlice, {
-            //Implement Alice's interact object here
+            ...Player('Alice'),
         }),
-        backend.Bob( ctcBob, {
-            //implement Bob's interact object here
+        backend.Bob(ctcBob, {
+            ...Player('Bob'),
         }),
     ]);
 })();
-
