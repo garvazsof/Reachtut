@@ -18,6 +18,7 @@ const stdlib = loadStdlib(process.env);
     const HAND = ['Rock', 'Paper', 'Scissors'];
     const OUTCOME = ['Bob wins', 'Draw', 'Alice Wins'];
     const Player = (Who) => ({
+        ...stdlib.hasRandom,
         getHand: () => {
             const hand = Math.floor(Math.random() * 3);
             console.log(`${Who} played ${HAND[hand]}`);
@@ -46,5 +47,5 @@ const stdlib = loadStdlib(process.env);
 
     console.log(`Alice went from ${beforeAlice} to ${afterAlice}.`);
     console.log(`Bob went from ${beforeBob} to ${afterBob}`);
-    
+
 })();
